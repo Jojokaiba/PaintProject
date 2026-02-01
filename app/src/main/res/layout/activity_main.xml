@@ -5,4 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity">
+
+    <!-- Boutons -->
+    <LinearLayout
+        android:id="@+id/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ligne" />
+
+        <Button
+            android:id="@+id/btnRect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rect" />
+
+        <Button
+            android:id="@+id/btnOval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oval" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

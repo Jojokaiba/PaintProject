@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -18,11 +17,10 @@ import com.jcorp.pingmong.data.FigureRect;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
 
 public class DrawingView extends View {
 
-    private List<Figure> figures = new ArrayList<>();
+    private final List<Figure> figures = new ArrayList<>();
     float posStartX;
     float posStartY;
 
@@ -35,6 +33,11 @@ public class DrawingView extends View {
     private int currentFigureType = 1;
 
     private Figure currentFigure = null;
+
+    public static final int LINE = 1;
+    public static final int RECT = 2;
+    public static final int OVAL = 3;
+
 
     public DrawingView(Context context) {
         super(context);
@@ -72,8 +75,10 @@ public class DrawingView extends View {
             figure.displayCanvas(drawingCanvas);
         }
         // drawingCanvas.drawLine(posStartX, posStartY, posCurrentX, posCurrentY, drawingPaint);
-        if (currentFigure != null)
-        currentFigure.displayCanvas(drawingCanvas);
+        if (currentFigure != null){
+            currentFigure.displayCanvas(drawingCanvas);
+        }
+
     }
 
     @Override
@@ -113,6 +118,11 @@ public class DrawingView extends View {
         invalidate();
         return true;
     }
+
+    public void setCurrentFigureType(int figureType) {
+        this.currentFigureType = figureType;
+    }
+
 }
 
 

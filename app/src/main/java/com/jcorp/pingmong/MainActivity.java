@@ -15,6 +15,9 @@ import com.jcorp.pingmong.views.DrawingView;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private DrawingView drawingView; // ← IMPORTANT
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +29,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
         addDrawingView();
+        setupButtons();
     }
 
     private void addDrawingView(){
-        DrawingView drawingView = new DrawingView(this);
+        drawingView = new DrawingView(this);
         drawingView.setId(View.generateViewId());
 
         //Create ConstraintLayout params
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         // Constrain to all four edges of parent
-        params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+        params.topToBottom = R.id.tools;
         params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
         params.startToStart = ConstraintLayout.LayoutParams.PARENT_ID;
         params.endToEnd = ConstraintLayout.LayoutParams.PARENT_ID;
@@ -50,4 +54,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private void setupButtons(){
+        findViewById(R.id.btnLine).setOnClickListener(v ->
+                drawingView.setCurrentFigureType(DrawingView.LINE));
+
+        findViewById(R.id.btnRect).setOnClickListener(v ->
+                drawingView.setCurrentFigureType(DrawingView.RECT));
+
+        findViewById(R.id.btnOval).setOnClickListener(v ->
+                drawingView.setCurrentFigureType(DrawingView.OVAL));
+    }
+
 }
