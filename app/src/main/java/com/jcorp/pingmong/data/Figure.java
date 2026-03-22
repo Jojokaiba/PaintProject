@@ -13,6 +13,9 @@ public abstract class Figure {
 
     protected Paint paint;
 
+    protected int strokeColor;
+    protected int fillColor;
+    protected float strokeWidth;
 
 
     public Figure(int figureType, float startX, float startY , float endX, float endY,  Paint paint ) {
@@ -40,5 +43,60 @@ public abstract class Figure {
         }
     } */
 
+    public void setStyle(int strokeColor, int fillColor, float strokeWidth){
+        this.strokeColor = strokeColor;
+        this.fillColor = fillColor;
+        this.strokeWidth = strokeWidth;
+    }
+
+    protected Paint getStrokePaint(){
+        Paint p = new Paint();
+        p.setStyle(Paint.Style.STROKE);
+        p.setColor(strokeColor);
+        p.setStrokeWidth(strokeWidth);
+        p.setAntiAlias(true);
+        return p;
+    }
+
+
+    protected Paint getFillPaint(){
+        Paint p = new Paint();
+        p.setStyle(Paint.Style.FILL);
+        p.setColor(fillColor);
+        p.setAntiAlias(true);
+        return p;
+    }
+
+
+    public boolean contains(float x, float y){
+        return x >= Math.min(startX, endX) &&
+               x <= Math.max(startX, endX) &&
+               y >= Math.min(startY, endY) &&
+               y <= Math.max(startY, endY);
+    }
+
+    public void move(float dx, float dy){
+        startX = startX + dx;
+        endX = endX + dx;
+        startY = startY + dy;
+        endY = endY + dy;
+    }
+
+
+    public float getStartX() {     //On crée des getters pour les réutiliser dans DrawingView au niveau de onDraw
+        return startX;
+    }
+
+    public float getStartY() {
+        return startY;
+    }
+
+    public float getEndX() {
+        return endX;
+    }
+
+    public float getEndY() {
+        return endY;
+    }
     public abstract void displayCanvas(Canvas canvas);
 }

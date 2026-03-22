@@ -10,6 +10,7 @@ public class FigureRect extends Figure{
 
     @Override
     public void displayCanvas(Canvas canvas) {
-        canvas.drawRect(startX, startY, endX, endY, paint);
+        canvas.drawRect(startX, startY, endX, endY, getFillPaint());
+        canvas.drawRect(startX, startY, endX, endY, getStrokePaint());
     }
 }

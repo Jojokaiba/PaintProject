@@ -1,6 +1,11 @@
 package com.jcorp.pingmong;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,6 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawingView drawingView; // ← IMPORTANT
 
+    private boolean redActive = false;
+    private boolean blueActive = false;
+    private boolean fillActive = false;
+    private boolean thickActive =false;
+
+    private int strokeColor = Color.BLACK;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         });
         addDrawingView();
         setupButtons();
+        setupExtraButtons();
     }
 
     private void addDrawingView(){
@@ -64,6 +77,84 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnOval).setOnClickListener(v ->
                 drawingView.setCurrentFigureType(DrawingView.OVAL));
+    }
+
+    private void setupExtraButtons(){
+
+        findViewById(R.id.btnUndo).setOnClickListener(v -> drawingView.undo());
+
+        findViewById(R.id.btnDelete).setOnClickListener(v -> drawingView.deleteSelected());
+
+        findViewById(R.id.btnClear).setOnClickListener(v -> drawingView.clearCanvas());
+
+        findViewById(R.id.btnRed).setOnClickListener(v -> {
+            if (!redActive){
+                drawingView.setStrokeColor(Color.RED);
+                redActive = true;
+                strokeColor = Color.RED;
+            }else{
+                drawingView.setStrokeColor(Color.BLACK);            // couleur par défaut
+                redActive = false;
+                strokeColor = Color.BLACK;
+            }
+
+        });
+
+        findViewById(R.id.btnBlue).setOnClickListener(v -> {
+            if (!blueActive){
+                drawingView.setStrokeColor(Color.BLUE);
+                blueActive = true;
+                strokeColor = Color.BLUE;
+            }else{
+                drawingView.setStrokeColor(Color.BLACK);  // couleur par défaut
+                blueActive =false;
+                strokeColor = Color.BLACK;
+            }
+
+        });
+
+        findViewById(R.id.btnFill).setOnClickListener(v -> {
+            if (!fillActive){
+                if (strokeColor != Color.BLACK) {                   // Si le conteur est coloré alors le remplissage prend la même couleur
+                    drawingView.setFillColor(strokeColor);
+                }else{                                              // Sinon le remplissage est gris
+                    drawingView.setFillColor(Color.GRAY);
+                }
+                fillActive = true;
+
+            }else{
+                drawingView.setFillColor(Color.TRANSPARENT);
+                fillActive = false;
+            }
+        });
+
+        findViewById(R.id.btnThick).setOnClickListener(v ->{
+            if(!thickActive){
+               drawingView.setStrokeWidth(20);
+               thickActive = true;
+            }else{
+                drawingView.setStrokeWidth(10);
+                thickActive = false;
+            }
+
+        });
+
+        findViewById(R.id.btnShare).setOnClickListener(v -> shareDrawing());
+    }
+
+    private void shareDrawing(){
+        Bitmap bitmap = drawingView.getBitmap();
+
+        String path = MediaStore.Images.Media.insertImage(
+                getContentResolver(), bitmap, "Drawing", null);
+
+        Uri uri = Uri.parse(path);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+
+        startActivity(Intent.createChooser(intent, "Partager"));
     }
 
 }

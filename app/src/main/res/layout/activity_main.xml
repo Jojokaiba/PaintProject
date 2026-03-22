@@ -7,33 +7,89 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Boutons -->
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/tools"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp"
+        android:scrollbars="none"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <Button
-            android:id="@+id/btnLine"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ligne" />
+            android:orientation="horizontal"
+            android:padding="8dp">
 
-        <Button
-            android:id="@+id/btnRect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rect" />
+            <Button
+                android:id="@+id/btnLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ligne"/>
 
-        <Button
-            android:id="@+id/btnOval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Oval" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnRect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rect"/>
+
+            <Button
+                android:id="@+id/btnOval"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Oval"/>
+
+            <Button
+                android:id="@+id/btnUndo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Annuler"/>
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reset"/>
+
+            <Button
+                android:id="@+id/btnRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rouge"/>
+
+            <Button
+                android:id="@+id/btnBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bleu"/>
+
+            <Button
+                android:id="@+id/btnFill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remplir"/>
+
+            <Button
+                android:id="@+id/btnThick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Épaisseur"/>
+
+            <Button
+                android:id="@+id/btnShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Partager"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

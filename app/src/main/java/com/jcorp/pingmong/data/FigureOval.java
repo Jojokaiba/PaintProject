@@ -11,6 +11,7 @@ public class FigureOval extends Figure{
 
     @Override
     public void displayCanvas(Canvas canvas) {
-        canvas.drawOval(startX, startY, endX, endY, paint);
+        canvas.drawOval(startX, startY, endX, endY, getFillPaint());
+        canvas.drawOval(startX, startY, endX, endY, getStrokePaint());
     }
 }
